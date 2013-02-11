@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <string name="hello">Hello World, Main!</string>
+    <string name="app_name">AndroidGrafik</string>
+    <string name="startgame">Start Game</string>
+    <string name="basicGameEngine">Basic Game Engine</string>
+    <string name="hilfe">Hilfe</string>
+    <string name="back">zurück</string>
+</resources>
