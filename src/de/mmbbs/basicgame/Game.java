@@ -1,5 +1,7 @@
 package de.mmbbs.basicgame;
 
+// Kommentar in Game.java ohne voher Pull
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
