@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-
+//kommentar
 public class Game extends Activity {
 	Leinwand l;
 	
