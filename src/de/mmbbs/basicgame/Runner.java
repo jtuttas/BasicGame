@@ -40,7 +40,7 @@ public class Runner implements Runnable {
 					}
 					stop = System.currentTimeMillis();
 					diff=stop-start;
-					Log.d(Main.TAG, "diff="+diff);
+					//Log.d(Main.TAG, "diff="+diff);
 				}
 			}
 			finally {
@@ -49,8 +49,8 @@ public class Runner implements Runnable {
 				}				
 			}
 			try {
-				if ((50-diff)>0)
-				Thread.sleep(50-diff);
+				if ((40-diff)>0)
+				Thread.sleep(40-diff);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

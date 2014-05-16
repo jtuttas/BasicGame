@@ -21,6 +21,8 @@ public class Leinwand extends SurfaceView implements OnTouchListener  {
 	Bitmap ship;
 	int shipx = 80;
 	int shipy = 80;
+	FragmentField fragmentField;
+	
 	
 	public Leinwand(Context context) {
 		super(context);
@@ -29,7 +31,8 @@ public class Leinwand extends SurfaceView implements OnTouchListener  {
         setFocusableInTouchMode(true);
         this.setOnTouchListener(this);
        
-        ship = BitmapFactory.decodeResource(this.getResources(),R.drawable.spaceship);
+        ship = BitmapFactory.decodeResource(this.getResources(),R.drawable.flappy);
+        fragmentField = new FragmentField(context);
         reset();
         runner = new Runner(this);
         runner.start();
@@ -43,7 +46,8 @@ public class Leinwand extends SurfaceView implements OnTouchListener  {
         this.setOnTouchListener(this);
         
         
-        ship = BitmapFactory.decodeResource(this.getResources(),R.drawable.spaceship);
+        ship = BitmapFactory.decodeResource(this.getResources(),R.drawable.flappy);
+        fragmentField = new FragmentField(context);
         
         runner = new Runner(this);
         runner.start();
@@ -52,6 +56,7 @@ public class Leinwand extends SurfaceView implements OnTouchListener  {
 
 	public void update() {
 		ticks++;
+		fragmentField.tick(this.getWidth());
 		
 		
 	}
@@ -64,10 +69,10 @@ public class Leinwand extends SurfaceView implements OnTouchListener  {
 		g.drawColor(Color.BLACK);
 		g.drawText("Touch: ("+mTouchX+"/"+mTouchY+") ticks="+ticks, 20, 20, p);
 		p.setColor(Color.WHITE);
+		fragmentField.paint(g, p);
 		g.drawBitmap(ship, shipx, shipy, p);
-		
 	}
-	/*
+	/* 
 	@Override
 	protected void onDraw(Canvas g) {
 		// TODO Auto-generated method stub
