@@ -36,7 +36,8 @@ public class Runner implements Runnable {
 					start = System.currentTimeMillis();
 					leinwand.update();
 					if (c!=null) {
-						leinwand.render(c);
+						leinwand.render(c,start);
+					
 					}
 					stop = System.currentTimeMillis();
 					diff=stop-start;
@@ -49,8 +50,8 @@ public class Runner implements Runnable {
 				}				
 			}
 			try {
-				if ((40-diff)>0)
-				Thread.sleep(40-diff);
+				if ((15-diff)>0)
+				Thread.sleep(15-diff);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -61,16 +61,18 @@ public class Leinwand extends SurfaceView implements OnTouchListener  {
 		
 	}
 	
-	public void render(Canvas g) {
+	public void render(Canvas g,long start) {
 		Paint p = new Paint();
 		p.setColor(Color.CYAN);
 		p.setAntiAlias(true);
-		p.setTextSize((float) 20.0);
+		p.setTextSize((float) 15.0);
 		g.drawColor(Color.BLACK);
-		g.drawText("Touch: ("+mTouchX+"/"+mTouchY+") ticks="+ticks, 20, 20, p);
 		p.setColor(Color.WHITE);
 		fragmentField.paint(g, p);
 		g.drawBitmap(ship, shipx, shipy, p);
+		long stop= System.currentTimeMillis();
+		long diff=(stop-start);
+		g.drawText("("+mTouchX+"/"+mTouchY+") ticks="+ticks+" diff="+diff+" ms", 20, 20, p);
 	}
 	/* 
 	@Override
@@ -87,10 +89,10 @@ public class Leinwand extends SurfaceView implements OnTouchListener  {
 	public boolean onTouch(View v, MotionEvent event) {
 		mTouchX = (int)event.getX();
 		mTouchY = (int)event.getY();
-		if (mTouchX<shipx) shipx--;
-		if (mTouchX>shipx) shipx++;
-		if (mTouchY<shipy) shipy--;
-		if (mTouchY>shipy) shipy++;
+		if (mTouchX<shipx) shipx-=2;
+		if (mTouchX>shipx) shipx+=2;
+		if (mTouchY<shipy) shipy-=2;
+		if (mTouchY>shipy) shipy+=2;
 		return true;
 	}
 
