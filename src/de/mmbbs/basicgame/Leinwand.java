@@ -29,6 +29,17 @@ public class Leinwand extends SurfaceView implements OnTouchListener  {
 	public Leinwand(Context context) {
 		super(context);
 		// TODO Auto-generated constructor stub
+		
+		init(context);
+	}
+	
+	public Leinwand(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		// TODO Auto-generated constructor stub
+		init(context);
+	}
+
+	private void init(Context context) {
 		setFocusable(true);
         setFocusableInTouchMode(true);
         this.setOnTouchListener(this);
@@ -40,26 +51,13 @@ public class Leinwand extends SurfaceView implements OnTouchListener  {
         reset();
         runner = new Runner(this);
         runner.start();
+
 	}
 	
-	public Leinwand(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		// TODO Auto-generated constructor stub
-		setFocusable(true);
-        setFocusableInTouchMode(true);
-        this.setOnTouchListener(this);
-        
-        bg = BitmapFactory.decodeResource(context.getResources(),R.drawable.bg);
-        srcRect=new Rect(0,0,bg.getWidth(),bg.getHeight());
-        flappy = new Object2D(R.drawable.flappy, context);
-        apfel = new Object2D(R.drawable.apfel, context);
-        fragmentField = new FragmentField(context);
-        
-        runner = new Runner(this);
-        runner.start();
-        
+	public void exit() {
+		runner.stop();
 	}
-
+	
 	public void update() {
 		ticks++;
 		fragmentField.tick(this.getWidth());
@@ -73,6 +71,18 @@ public class Leinwand extends SurfaceView implements OnTouchListener  {
 		if (flappy.collide(apfel)) {
 			apfel.setPosition(this.getWidth(), (int) apfel.getY());
 		}
+		fragmentField.getElement(0, 0);
+		if (
+				fragmentField.getElement(flappy.getX()+flappy.getWidth()/2, flappy.getY())==1 || 
+				fragmentField.getElement(flappy.getX()+flappy.getWidth(), flappy.getY()+flappy.getHeight()/2)==1 ||
+				fragmentField.getElement(flappy.getX()+flappy.getWidth()/2, flappy.getY()+flappy.getHeight())==1 ||
+				fragmentField.getElement(flappy.getX(), flappy.getY()+flappy.getHeight()/2)==1
+				)	{
+			
+			flappy.setPosition(this.getWidth()/2, this.getHeight()/2);
+			Log.d("Ttest"," Kollision von Flappy mit Stein 2");
+		}
+		
 		
 		
 	}

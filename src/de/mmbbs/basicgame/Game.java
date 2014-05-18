@@ -10,6 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 //kommentar 2
 public class Game extends Activity {
+
 	Leinwand l;
 	
 	 @Override
@@ -18,6 +19,14 @@ public class Game extends Activity {
 		 return super.onCreateOptionsMenu(menu);
 	}
 
+	 
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		l.exit();
+	}
+	 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {

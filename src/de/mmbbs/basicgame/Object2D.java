@@ -34,11 +34,19 @@ public class Object2D {
 		return rect.intersects(rect, o.getRect());
 	}
 
-	private Rect getRect() {
+	public Rect getRect() {
 		// TODO Auto-generated method stub
 		return rect;
 	}
 
+	public int getWidth() {
+		return bitmap.getWidth();
+	}
+	
+	public int getHeight() {
+		return bitmap.getHeight();
+	}
+	
 	public void left(int i) {
 		// TODO Auto-generated method stub
 		this.setPosition(x-i, y);
