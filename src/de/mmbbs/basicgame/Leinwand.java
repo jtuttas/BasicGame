@@ -21,9 +21,11 @@ public class Leinwand extends SurfaceView implements OnTouchListener  {
 	int ticks;
 	Object2D flappy;
 	Object2D apfel;
+	Object2D ball;
 	FragmentField fragmentField;
 	Bitmap bg;
 	private Rect srcRect,dstRect;
+	Acceleration ac;
 	
 	
 	public Leinwand(Context context) {
@@ -47,7 +49,11 @@ public class Leinwand extends SurfaceView implements OnTouchListener  {
         srcRect=new Rect(0,0,bg.getWidth(),bg.getHeight());
         flappy = new Object2D(R.drawable.flappy, context);
         apfel = new Object2D(R.drawable.apfel, context);
+        ball = new Object2D(R.drawable.ball2, context);
+        
         fragmentField = new FragmentField(context);
+        ac =new Acceleration(0,0, 10);
+
         reset();
         runner = new Runner(this);
         runner.start();
@@ -61,7 +67,14 @@ public class Leinwand extends SurfaceView implements OnTouchListener  {
 	public void update() {
 		ticks++;
 		fragmentField.tick(this.getWidth());
-		
+		ac.tick();
+		ball.setPosition((int)ball.getX(), (int) (ac.getS()));
+		if (this.getHeight()!=0 && ball.getY()>(this.getHeight()-3*ball.getHeight())) {
+			
+			ac.bounce();
+		}
+
+		//Log.d("Ttest"," Ball Pos="+ball.getY());
 		apfel.left(1);
 		
 		if (apfel.getX() <=0) {
@@ -97,6 +110,7 @@ public class Leinwand extends SurfaceView implements OnTouchListener  {
 		fragmentField.paint(g, p);
 		flappy.paint(g, p);
 		apfel.paint(g, p);
+		ball.paint(g, p);
 		long stop= System.currentTimeMillis();
 		long diff=(stop-start);
 		g.drawText("("+mTouchX+"/"+mTouchY+") ticks="+ticks+" diff="+diff+" ms", 20, 20, p);
@@ -113,15 +127,14 @@ public class Leinwand extends SurfaceView implements OnTouchListener  {
 	}
 
 	public void reset() {
-		// TODO Auto-generated method stub
-		flappy.setPosition(this.getWidth()/2, this.getHeight()/2);
-		apfel.setPosition(this.getWidth(), this.getHeight()/2);
-		dstRect=new Rect(0,0,this.getWidth(),this.getHeight());
+		this.reset(this.getWidth(),this.getHeight());
 	}
 
 	public void reset(int width, int height) {
 		flappy.setPosition(width/2, height/2);
 		apfel.setPosition(width, height/2);
 		dstRect=new Rect(0,0,width,height);
+		ball.setPosition(width/2, 0);
+		ac.setS0(height/2);
 	}
 }
