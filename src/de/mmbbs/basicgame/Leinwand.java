@@ -19,7 +19,7 @@ public class Leinwand extends SurfaceView implements OnTouchListener  {
 	public float mTouchY=-1;
 	Runner runner;
 	int ticks;
-	Object2D flappy;
+	Flappy flappy;
 	Object2D apfel;
 	Object2D ball;
 	FragmentField fragmentField;
@@ -47,7 +47,7 @@ public class Leinwand extends SurfaceView implements OnTouchListener  {
         this.setOnTouchListener(this);
         bg = BitmapFactory.decodeResource(context.getResources(),R.drawable.bg);
         srcRect=new Rect(0,0,bg.getWidth(),bg.getHeight());
-        flappy = new Object2D(R.drawable.flappy, context);
+        flappy = new Flappy(R.drawable.flappyani, context,3);
         apfel = new Object2D(R.drawable.apfel, context);
         ball = new Object2D(R.drawable.ball2, context);
         
@@ -66,6 +66,7 @@ public class Leinwand extends SurfaceView implements OnTouchListener  {
 	
 	public void update() {
 		ticks++;
+		flappy.tick();
 		fragmentField.tick(this.getWidth());
 		ac.tick();
 		ball.setPosition((int)ball.getX(), (int) (ac.getS()));
@@ -119,6 +120,10 @@ public class Leinwand extends SurfaceView implements OnTouchListener  {
 	public boolean onTouch(View v, MotionEvent event) {
 		mTouchX = (int)event.getX();
 		mTouchY = (int)event.getY();
+		if (flappy.dotInObject((int)mTouchX,(int)mTouchY)) {
+			Log.d("Ttest","HitFlappy");
+			flappy.jump();
+		}
 		if (mTouchX<flappy.getX()) flappy.left(2);
 		if (mTouchX>flappy.getX()) flappy.right(2);
 		if (mTouchY<flappy.getY()) flappy.up(2);

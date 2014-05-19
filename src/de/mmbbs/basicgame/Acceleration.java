@@ -19,13 +19,13 @@ public class Acceleration {
 	public Acceleration (float s0,int v0,int a) {
 		this.v0=v0;
 		this.a=a;
-		this.s0=s0;
+		this.setS0(s0);
 		reset();
 	}
 	
 	public void setS0(float s0) {
 		this.s0=s0*100;
-		Log.d ("Ttest","Set Pos to s0="+s0);
+		//Log.d ("Ttest","Set Pos to s0="+this.s0);
 	}
 	
 	public void setV0(int v) {

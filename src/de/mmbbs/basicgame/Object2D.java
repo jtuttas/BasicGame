@@ -9,9 +9,10 @@ import android.graphics.Rect;
 
 public class Object2D {
 
-	private int x=0,y=0;
-	private Bitmap bitmap;
-	private Rect rect;
+	protected int x=0;
+	protected int y=0;
+	protected Bitmap bitmap;
+	protected Rect rect;
 	public float getX;
 	public float getY;
 	
@@ -28,6 +29,11 @@ public class Object2D {
 	
 	public void paint(Canvas c,Paint p) {
 		c.drawBitmap(bitmap, x, y, p);
+	}
+	
+	
+	public boolean dotInObject(int x,int y) {
+		return rect.intersects(x, y, x, y);
 	}
 	
 	public boolean collide(Object2D o) {
