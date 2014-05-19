@@ -134,7 +134,7 @@ public class Leinwand extends SurfaceView implements OnTouchListener  {
 		flappy.setPosition(width/2, height/2);
 		apfel.setPosition(width, height/2);
 		dstRect=new Rect(0,0,width,height);
-		ball.setPosition(width/2, 0);
+		ball.setPosition(width/4, 0);
 		ac.setS0(height/2);
 	}
 }

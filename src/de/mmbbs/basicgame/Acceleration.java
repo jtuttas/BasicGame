@@ -53,10 +53,12 @@ public class Acceleration {
 
 	public void bounce() {
 		// TODO Auto-generated method stub
-		
-		v0=(-a*ticks)-v0;
+		//ticks=ticks-2;
+		//this.tick();
+		v0=(-a*ticks)-v0-2*a;
 		s0=distance;
 		Log.d ("Ttest","** BOUNCE  ** v0="+v0+" s0="+s0+"ticks="+ticks);
 		ticks=0;
+		
 	}
 }
