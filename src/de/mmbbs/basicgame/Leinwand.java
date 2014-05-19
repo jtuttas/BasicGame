@@ -52,7 +52,7 @@ public class Leinwand extends SurfaceView implements OnTouchListener  {
         ball = new Object2D(R.drawable.ball2, context);
         
         fragmentField = new FragmentField(context);
-        ac =new Acceleration(0,0, 10);
+        ac =new Acceleration(0,0, 12);
 
         reset();
         runner = new Runner(this);
