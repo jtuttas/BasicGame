@@ -34,14 +34,5 @@ public class Flappy extends AnimatedObject {
 		}
 	}
 
-	@Override
-	public void setPosition(int xPos, int yPos) {
-		// TODO Auto-generated method stub
-		if (ac!=null) {
-			super.setPosition(xPos, ac.getS());
-		}
-		else {
-			super.setPosition(xPos, yPos);
-		}
-	}
+	
 }
