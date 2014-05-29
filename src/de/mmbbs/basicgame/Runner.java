@@ -36,7 +36,7 @@ public class Runner implements Runnable {
 					start = System.currentTimeMillis();
 					leinwand.update();
 					if (c!=null) {
-						leinwand.render(c,start);
+						leinwand.render(c);
 					
 					}
 					stop = System.currentTimeMillis();

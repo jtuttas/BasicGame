@@ -55,7 +55,5 @@ public class Game extends Activity {
         
 	}
 	
-	public void reset(View v) {
-		l.reset();
-	}
+	
 }

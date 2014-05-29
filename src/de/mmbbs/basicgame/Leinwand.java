@@ -26,6 +26,10 @@ public class Leinwand extends SurfaceView implements OnTouchListener  {
 	Bitmap bg;
 	private Rect srcRect,dstRect;
 	Acceleration ac;
+	int fps=0,fpsCounter;
+	long start=0,stop=0;
+	long fpsTimeStamp=0;
+	
 	
 	
 	public Leinwand(Context context) {
@@ -40,6 +44,7 @@ public class Leinwand extends SurfaceView implements OnTouchListener  {
 		// TODO Auto-generated constructor stub
 		init(context);
 	}
+	
 
 	private void init(Context context) {
 		setFocusable(true);
@@ -57,6 +62,7 @@ public class Leinwand extends SurfaceView implements OnTouchListener  {
         reset();
         runner = new Runner(this);
         runner.start();
+        fpsTimeStamp=System.currentTimeMillis();
 
 	}
 	
@@ -65,6 +71,13 @@ public class Leinwand extends SurfaceView implements OnTouchListener  {
 	}
 	
 	public void update() {
+		start=System.currentTimeMillis();
+		fpsCounter++;
+		if (System.currentTimeMillis()>fpsTimeStamp+1000) {
+			fpsTimeStamp=System.currentTimeMillis();
+			fps=fpsCounter;
+			fpsCounter=0;
+		}
 		ticks++;
 		flappy.tick();
 		fragmentField.tick(this.getWidth());
@@ -101,7 +114,7 @@ public class Leinwand extends SurfaceView implements OnTouchListener  {
 		
 	}
 	
-	public void render(Canvas g,long start) {
+	public void render(Canvas g) {
 		Paint p = new Paint();
 		p.setColor(Color.CYAN);
 		p.setAntiAlias(true);
@@ -112,9 +125,9 @@ public class Leinwand extends SurfaceView implements OnTouchListener  {
 		flappy.paint(g, p);
 		apfel.paint(g, p);
 		ball.paint(g, p);
-		long stop= System.currentTimeMillis();
+		stop= System.currentTimeMillis();
 		long diff=(stop-start);
-		g.drawText("("+mTouchX+"/"+mTouchY+") ticks="+ticks+" diff="+diff+" ms", 20, 20, p);
+		g.drawText("("+mTouchX+"/"+mTouchY+") FPS="+fps+" gameloop="+diff+" ms", 20, 20, p);
 	}
 
 	public boolean onTouch(View v, MotionEvent event) {
